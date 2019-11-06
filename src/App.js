@@ -5,6 +5,7 @@ import Report from './components/report';
 import Header from './components/report/header';
 import Footer from './components/report/footer';
 import Body from './components/report/body';
+import ContentHeader from './components/report/content-header';
 
 import ToolBox from './components/toolbox';
 
@@ -119,6 +120,7 @@ function App() {
         <div className="col-sm">
           <Report data={data}>
             <Header preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
+            <ContentHeader />
             <Body preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
             <Footer preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
             />
