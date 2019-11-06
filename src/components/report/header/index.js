@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Header({ data }) {
+function Header({ data, onUpdate, meta, preview }) {
   const [rows, setRow] = useState([]);
-  const [preview, setPreview] = useState(false);
 
   useEffect(() => {
-    console.log(rows);
-  });
+    console.log('meta: ', meta);
+    setRow(meta || []);
+  }, []);
+
+  useEffect(() => {
+    onUpdate(rows);
+  }, [rows]);
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -67,16 +71,12 @@ function Header({ data }) {
     setRow(newRows);
   }
 
-  const previewReport = (e) => {
-    setPreview(!preview);
-  }
-
 
   let design = (
     <div className="report-header"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Header</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      <h1>Header</h1>
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -101,7 +101,7 @@ function Header({ data }) {
 
   let runtime = (
     <div className="report-header">
-      <h1>Header</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      <h1>Header</h1>
       {r &&
         <div key={r.id}
           className="row report-row edit-mode">

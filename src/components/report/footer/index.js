@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Footer({ data, calculations }) {
+function Footer({ data, calculations, preview }) {
   const [rows, setRow] = useState([]);
-  const [preview, setPreview] = useState(false);
 
   useEffect(() => {
     console.log(rows);
@@ -67,16 +66,12 @@ function Footer({ data, calculations }) {
     setRow(newRows);
   }
 
-  const previewReport = (e) => {
-    setPreview(!preview);
-  }
-
 
   let design = (
     <div className="report-footer"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Footer</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      <h1>Footer</h1>
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -101,7 +96,7 @@ function Footer({ data, calculations }) {
 
   let runtime = (
     <div className="report-footer">
-      <h1>Footer</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      <h1>Footer</h1>
       {r &&
         <div key={r.id}
           className="row report-row edit-mode">

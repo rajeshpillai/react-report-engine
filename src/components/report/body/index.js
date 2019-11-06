@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Body({ data, onRendered }) {
+function Body({ data, onRendered, onUpdate, meta, preview }) {
   const [rows, setRow] = useState([]);
-  const [preview, setPreview] = useState(false);
 
   useEffect(() => {
     console.log('updated..');
     onRendered();
   });
+
+  // Update from parent (report meta data)
+  useEffect(() => {
+    setRow(meta || []);
+  }, []);
+
+  // Inform parent that rows have updated here
+  useEffect(() => {
+    onUpdate(rows);
+  }, [rows]);
 
 
   const onDragOver = (e) => {
@@ -69,16 +78,12 @@ function Body({ data, onRendered }) {
     setRow(newRows);
   }
 
-  const previewReport = (e) => {
-    setPreview(!preview);
-  }
-
 
   let design = (
     <div className="report-body"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Body</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      <h1>Body</h1>
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -102,7 +107,7 @@ function Body({ data, onRendered }) {
   console.log("rows: ", rows);
   let runtime = (
     <div className="report-body">
-      <h1>Body</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      <h1>Body</h1>
       {
         data.map((r) => {
           return <div key={r.id}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import Report from './components/report';
@@ -23,6 +23,7 @@ const data = {
   }
 }
 
+
 const calculations = {
   sum: (field) => () => sum(field),
   avg: (field) => () => avg(field),
@@ -45,21 +46,57 @@ function avg(field) {
 }
 
 function App() {
+
+  const [meta, setMeta] = useState(() => {
+    return JSON.parse(localStorage.getItem('reportMeta'));
+  });
+
+  const [preview, togglePreview] = useState(false);
+
+  // First load
+  useEffect(() => {
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('reportMeta', JSON.stringify(meta));
+  }, [meta]);
+
   const onBodyRendered = () => {
 
   }
 
+  const onHeaderUpdate = (header) => {
+    setMeta({
+      ...meta,
+      header: header
+    });
+  }
+
+  const onBodyUpdate = (body) => {
+    setMeta({
+      ...meta,
+      body: body
+    });
+  }
+
+
   return (
     <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-12">
+          <button className="float-right" onClick={()=>togglePreview(!preview)} >PREVIEW</button>
+          <button className="float-right" >SAVE</button>
+        </div>
+      </div>
       <div className="row">
         <div className="toolbox col-sm-2">
           <ToolBox />
         </div>
         <div className="col-sm">
           <Report data={data}>
-            <Header data={data.header} />
-            <Body data={data.body} onRendered={onBodyRendered} />
-            <Footer data={data.footer}
+            <Header preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
+            <Body preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
+            <Footer preview={preview} data={data.footer}
               calculations={{
                 sum: calculations.sum("sales"),
                 avg: calculations.avg("sales")
@@ -68,7 +105,7 @@ function App() {
         </div>
       </div>
 
-    </div>
+    </div >
   );
 }
 
