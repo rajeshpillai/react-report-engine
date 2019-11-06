@@ -68,10 +68,8 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
       }
       return r;
     });
-
     setRow(newRows);
   }
-
 
   let design = (
     <div className="report-footer"
@@ -116,11 +114,6 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
           </div>
         })
       }
-
-      {calculations && <h2>Total: {calculations.sum()}</h2>}
-      {calculations && <h2>Avg  : {calculations.avg().toFixed(2)}</h2>}
-      {calculations && <h2>Max  : {calculations.max()}</h2>}
-
     </div>
   );
 
