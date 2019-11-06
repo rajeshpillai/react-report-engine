@@ -14,9 +14,9 @@ const data = {
     subTitle: "Subtitle 1"
   },
   body: [
-    { id: 1, name: "Rajesh", city: "Mumbai" },
-    { id: 2, name: "Rocket Sketch", city: "Mumbai" },
-    { id: 3, name: "Rocker Coder", city: "Mumbai" },
+    { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
+    { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
+    { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
   ],
   footer: {
     "title": "Footer 1",
@@ -33,7 +33,7 @@ function App() {
           <Report>
             <Header data={data.header} />
             <Body data={data.body} />
-            <Footer />
+            <Footer data ={data.footer} />
           </Report>
         </div>
       </div>
