@@ -91,7 +91,10 @@ function App() {
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
-          <button className="float-right" onClick={() => togglePreview(!preview)} >PREVIEW</button>
+          <button className="float-right"
+            onClick={() => togglePreview(!preview)} >
+            {preview ? "DESIGN": "PREVIEW"} 
+          </button>
           <button className="float-right" >SAVE</button>
         </div>
       </div>
