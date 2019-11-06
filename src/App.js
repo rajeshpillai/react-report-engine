@@ -23,10 +23,11 @@ const data = {
   }
 }
 
-
+/* Formulas */
 const calculations = {
   sum: (field) => () => sum(field),
   avg: (field) => () => avg(field),
+  max: (field) => () => max(field)
 };
 
 function sum(field) {
@@ -43,6 +44,10 @@ function avg(field) {
   }, 0);
 
   return sum / data.body.length;
+}
+
+function max(field) {
+  return Math.max(...data.body.map(d => d[field]));
 }
 
 function App() {
@@ -93,7 +98,7 @@ function App() {
         <div className="col-sm-12">
           <button className="float-right"
             onClick={() => togglePreview(!preview)} >
-            {preview ? "DESIGN": "PREVIEW"} 
+            {preview ? "DESIGN" : "PREVIEW"}
           </button>
           <button className="float-right" >SAVE</button>
         </div>
@@ -109,7 +114,8 @@ function App() {
             <Footer preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
               calculations={{
                 sum: calculations.sum("sales"),
-                avg: calculations.avg("sales")
+                avg: calculations.avg("sales"),
+                max: calculations.max("sales")
               }} />
           </Report>
         </div>
