@@ -84,7 +84,7 @@ function Header({ data, onUpdate, meta, preview }) {
             onDrop={(e) => onDropRow(e, r.id)}
             className="row report-row edit-mode">
             {r.cols && r.cols.map((c) =>
-              <div key={c.id}
+              <div key={'c' + c.id}
                 className="col-sm report-col edit-mode"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
                 {c.field}
@@ -106,7 +106,7 @@ function Header({ data, onUpdate, meta, preview }) {
         <div key={r.id}
           className="row report-row edit-mode">
           {r && r.cols && r.cols.map((c) =>
-            <div key={c.id}
+            <div key={'c' + c.id}
               className="col-sm report-col edit-mode"
               onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
               {data[c.field]}

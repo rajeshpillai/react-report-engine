@@ -79,6 +79,13 @@ function App() {
     });
   }
 
+  const onFooterUpdate = (footer) => {
+    setMeta({
+      ...meta,
+      footer: footer
+    });
+  }
+
 
   return (
     <div className="container-fluid">
@@ -96,7 +103,7 @@ function App() {
           <Report data={data}>
             <Header preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
             <Body preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
-            <Footer preview={preview} data={data.footer}
+            <Footer preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
               calculations={{
                 sum: calculations.sum("sales"),
                 avg: calculations.avg("sales")

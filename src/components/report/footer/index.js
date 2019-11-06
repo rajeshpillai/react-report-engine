@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Footer({ data, calculations, preview }) {
+function Footer({ data, calculations, preview, meta, onUpdate }) {
   const [rows, setRow] = useState([]);
 
+  // Update from parent (report meta data)
   useEffect(() => {
-    console.log(rows);
-  });
+    setRow(meta || []);
+  }, []);
+
+  // Inform parent that rows have updated here
+  useEffect(() => {
+    onUpdate(rows);
+  }, [rows]);
 
   const onDragOver = (e) => {
     e.preventDefault();

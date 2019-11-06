@@ -86,12 +86,12 @@ function Body({ data, onRendered, onUpdate, meta, preview }) {
       <h1>Body</h1>
       {
         rows.map((r) => {
-          return <div key={r.id}
+          return <div key={'r' + r.id}
             onDragOver={(e) => onDragOver(e)}
             onDrop={(e) => onDropRow(e, r.id)}
             className="row report-row edit-mode">
             {r.cols && r.cols.map((c) =>
-              <div key={c.id}
+              <div key={'c' + c.id}
                 className="col-sm report-col edit-mode"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
                 {c.field}
@@ -110,10 +110,10 @@ function Body({ data, onRendered, onUpdate, meta, preview }) {
       <h1>Body</h1>
       {
         data.map((r) => {
-          return <div key={r.id}
+          return <div key={'r' + r.id}
             className="row report-row edit-mode">
             {rows[0] && rows[0].cols && rows[0].cols.map((c) =>
-              <div key={c.id}
+              <div key={'c' + c.id}
                 className="col-sm report-col edit-mode"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
                 {r[c.field]}
