@@ -20,3 +20,22 @@
 .App-link {
   color: #09d3ac;
 }
+
+.report, .report-header, .report-body, .report-footer {
+  border: 1px dashed gray;
+  margin:3px;
+  background-color: white;
+}
+
+.report {
+  background-color: lightgray;
+}
+
+.toolbox {
+  border-right: 1px solid black;
+  min-height: 100vh;
+}
+
+.edit-mode {
+  background: yellow;
+}
