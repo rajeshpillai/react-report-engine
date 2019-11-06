@@ -8,6 +8,16 @@ import Body from './components/report/body';
 
 import ToolBox from './components/toolbox';
 
+
+
+/* Formulas */
+const calculations = {
+  sum: (field) => () => sum(field),
+  avg: (field) => () => avg(field),
+  max: (field) => () => max(field)
+};
+
+
 const data = {
   header: {
     title: "Header 1",
@@ -20,15 +30,11 @@ const data = {
   ],
   footer: {
     "title": "Copyright: Algorisys Technologies",
+    sum: calculations.sum("sales"),
+    avg: calculations.avg("sales"),
+    max: calculations.max("sales")
   }
 }
-
-/* Formulas */
-const calculations = {
-  sum: (field) => () => sum(field),
-  avg: (field) => () => avg(field),
-  max: (field) => () => max(field)
-};
 
 function sum(field) {
   let sum = data.body.reduce((total, current) => {

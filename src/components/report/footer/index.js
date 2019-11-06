@@ -110,7 +110,7 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
             <div key={c.id}
               className="col-sm report-col edit-mode"
               onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-              {data[c.field]}
+              {typeof data[c.field] == "function" ? data[c.field]() : data[c.field]}
             </div>
           )}
         </div>
@@ -118,7 +118,7 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
       {calculations && <h2>Total: {calculations.sum()}</h2>}
       {calculations && <h2>Avg  : {calculations.avg().toFixed(2)}</h2>}
       {calculations && <h2>Max  : {calculations.max()}</h2>}
-      
+
     </div>
   );
 
