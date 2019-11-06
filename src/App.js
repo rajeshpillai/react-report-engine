@@ -22,7 +22,33 @@ const data = {
     "title": "Footer 1",
   }
 }
+
+const calculations = {
+  sum: (field) => () => sum(field),
+  avg: (field) => () => avg(field),
+};
+
+function sum(field) {
+  let sum = data.body.reduce((total, current) => {
+    return total + current[field];
+  }, 0);
+
+  return sum;
+}
+
+function avg(field) {
+  let sum = data.body.reduce((total, current) => {
+    return total + current[field];
+  }, 0);
+
+  return sum / data.body.length;
+}
+
 function App() {
+  const onBodyRendered = () => {
+
+  }
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -30,10 +56,14 @@ function App() {
           <ToolBox />
         </div>
         <div className="col-sm">
-          <Report>
+          <Report data={data}>
             <Header data={data.header} />
-            <Body data={data.body} />
-            <Footer data ={data.footer} />
+            <Body data={data.body} onRendered={onBodyRendered} />
+            <Footer data={data.footer}
+              calculations={{
+                sum: calculations.sum("sales"),
+                avg: calculations.avg("sales")
+              }} />
           </Report>
         </div>
       </div>

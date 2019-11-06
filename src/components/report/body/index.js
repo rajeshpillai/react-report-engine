@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Body({ data }) {
+function Body({ data, onRendered }) {
   const [rows, setRow] = useState([]);
   const [preview, setPreview] = useState(false);
 
   useEffect(() => {
-    console.log(rows);
+    console.log('updated..');
+    onRendered();
   });
+
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -118,6 +120,8 @@ function Body({ data }) {
       }
     </div>
   );
+
+  console.log('rendered..');
 
   return (
     preview ? runtime : design

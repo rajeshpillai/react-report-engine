@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Footer({ data }) {
+function Footer({ data, calculations }) {
   const [rows, setRow] = useState([]);
   const [preview, setPreview] = useState(false);
 
@@ -114,6 +114,8 @@ function Footer({ data }) {
           )}
         </div>
       }
+      {calculations && <h2>Total: {calculations.sum()}</h2>}
+      {calculations && <h2>Avg  : {calculations.avg().toFixed(2)}</h2>}
     </div>
   );
 
