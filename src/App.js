@@ -61,7 +61,8 @@ function max(field) {
 function App() {
 
   const [meta, setMeta] = useState(() => {
-    return JSON.parse(localStorage.getItem('reportMeta'));
+    let meta = JSON.parse(localStorage.getItem('reportMeta'));
+    return meta || {};
   });
 
   const [preview, togglePreview] = useState(false);
@@ -120,11 +121,7 @@ function App() {
             <Header preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
             <Body preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
             <Footer preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
-              calculations={{
-                sum: calculations.sum("sales"),
-                avg: calculations.avg("sales"),
-                max: calculations.max("sales")
-              }} />
+            />
           </Report>
         </div>
       </div>

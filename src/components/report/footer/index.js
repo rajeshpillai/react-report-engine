@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Footer({ data, calculations, preview, meta, onUpdate }) {
+function Footer({ data, preview, meta, onUpdate }) {
   const [rows, setRow] = useState([]);
 
   // Update from parent (report meta data)
@@ -22,7 +22,7 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
     e.preventDefault();
     let source = e.dataTransfer.getData("text/plain");
     console.log(`${source} dropped at ${location}`);
-    let newRow = { id: ++id };
+    let newRow = { id: +new Date() };
     setRow([...rows, newRow]);
   }
 
@@ -41,7 +41,7 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
     let newRows = rows.map((r) => {
       if (r.id == location) {
         r.cols = row.cols || [];
-        let newCol = { id: ++id };
+        let newCol = { id: +new Date() };
         r.cols.push(newCol);
       }
       return r;
