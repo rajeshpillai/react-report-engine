@@ -31,8 +31,8 @@ function App() {
         </div>
         <div className="col-sm">
           <Report>
-            <Header />
-            <Body />
+            <Header data={data.header} />
+            <Body data={data.body} />
             <Footer />
           </Report>
         </div>

@@ -42,6 +42,28 @@ function Body() {
     setRow([...newRows]);
   }
 
+  const onColClick = (e, target) => {
+    alert(JSON.stringify(target));
+    // Grab the column by first grabbing the row
+    let fieldName = window.prompt("Enter field name:");
+
+    let newRows = rows.map((r) => {
+      if (r.id == target.r) {
+        if (r.cols) {
+          r.cols.map((c) => {
+            if (c.id == target.c) {
+              c.field = fieldName;
+            }
+            return c;
+          })
+        }
+      }
+      return r;
+    });
+
+    setRow(newRows);
+  }
+
   return (
     <div className="report-body"
       onDragOver={(e) => onDragOver(e)}
@@ -54,7 +76,11 @@ function Body() {
             onDrop={(e) => onDropRow(e, r.id)}
             className="row report-row edit-mode">
             {r.cols && r.cols.map((c) =>
-              <div key={c.id} className="col-sm report-col edit-mode"></div>
+              <div key={c.id}
+                className="col-sm report-col edit-mode"
+                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
+
+              </div>
             )}
           </div>
         })

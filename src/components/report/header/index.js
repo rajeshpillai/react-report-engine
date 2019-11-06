@@ -16,6 +16,7 @@ function Header() {
     e.preventDefault();
     let source = e.dataTransfer.getData("text/plain");
     console.log(`${source} dropped at ${location}`);
+    //todo: validate whether row is dropped or not
     let newRow = { id: ++id };
     setRow([...rows, newRow]);
   }
@@ -27,8 +28,6 @@ function Header() {
     console.log(`${source} dropped at row ${location}`);
 
     let row = rows.find((r) => r.id == location);
-    console.log('found: ', row);
-
 
     let newRows = rows.map((r) => {
       if (r.id == location) {
@@ -40,6 +39,10 @@ function Header() {
     })
 
     setRow([...newRows]);
+  }
+
+  const onColClick = (e, target) => {
+    alert(JSON.stringify(target));
   }
 
   return (
@@ -54,7 +57,10 @@ function Header() {
             onDrop={(e) => onDropRow(e, r.id)}
             className="row report-row edit-mode">
             {r.cols && r.cols.map((c) =>
-              <div key={c.id} className="col-sm report-col edit-mode"></div>
+              <div key={c.id}
+                className="col-sm report-col edit-mode"
+                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
+              </div>
             )}
           </div>
         })
