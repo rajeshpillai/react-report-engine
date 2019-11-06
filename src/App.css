@@ -38,4 +38,21 @@
 
 .edit-mode {
   background: yellow;
+  width: 100%;
 }
+
+.report-row {
+  min-height: 2em;
+  border: 1px solid gray;
+  margin: 2px;
+}
+
+.report-col {
+
+}
+
+/* toolbox elements */
+.row-element, .col-element {
+  border: 1px solid lightblue;
+}
+
