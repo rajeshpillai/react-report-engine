@@ -27,6 +27,8 @@ const data = {
     { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
     { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
     { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
+    { id: 4, name: "Rocker Doodler", city: "Kerala", sales: 300 },
+
   ],
   footer: {
     "title": "Copyright: Algorisys Technologies",
