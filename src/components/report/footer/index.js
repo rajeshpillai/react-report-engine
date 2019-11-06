@@ -98,23 +98,25 @@ function Footer({ data, calculations, preview, meta, onUpdate }) {
     </div>
   );
 
-  let r = rows[0];
 
   let runtime = (
     <div className="report-footer">
       <h1>Footer</h1>
-      {r &&
-        <div key={r.id}
-          className="row report-row edit-mode">
-          {r && r.cols && r.cols.map((c) =>
-            <div key={c.id}
-              className="col-sm report-col edit-mode"
-              onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-              {typeof data[c.field] == "function" ? data[c.field]() : data[c.field]}
-            </div>
-          )}
-        </div>
+      {
+        rows.map((r) => {
+          return <div key={r.id}
+            className="row report-row edit-mode">
+            {r && r.cols && r.cols.map((c) =>
+              <div key={c.id}
+                className="col-sm report-col edit-mode"
+                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
+                {typeof data[c.field] == "function" ? data[c.field]() : data[c.field]}
+              </div>
+            )}
+          </div>
+        })
       }
+
       {calculations && <h2>Total: {calculations.sum()}</h2>}
       {calculations && <h2>Avg  : {calculations.avg().toFixed(2)}</h2>}
       {calculations && <h2>Max  : {calculations.max()}</h2>}
