@@ -48,6 +48,33 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
     setRow([...newRows]);
   }
 
+  //todo: Check type of toolbox element being dropped
+  const onColumnDrop = (e, row, col) => {
+    e.stopPropagation();
+    let source = e.dataTransfer.getData("text/plain");
+    console.log(`${source} dropped at row ${row}, col ${col}`);
+    // Grab the column
+    let targetRow = rows.find((r) => r.id == row);
+    console.log('found: ', targetRow);
+
+    let newRows = rows.map((r) => {
+      if (r.id == row) {
+        if (r.cols) {
+          r.cols.map((c) => {
+            if (c.id == col) {
+              c.label = "Label";
+            }
+            return c;
+          })
+        }
+      }
+      return r;
+    });
+
+    setRow(newRows);
+
+  }
+
   const onColClick = (e, target) => {
     //alert(JSON.stringify(target));
     // Grab the column by first grabbing the row
@@ -84,9 +111,11 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
             className="row report-row edit-mode">
             {r.cols && r.cols.map((c) =>
               <div key={'c' + c.id}
+                onDragOver={(e) => onDragOver(e)}
+                onDrop={(e) => onColumnDrop(e, r.id, c.id)}
                 className="col-sm report-col edit-mode"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-                {c.field}
+                {c.label}{c.field}
               </div>
             )}
           </div>

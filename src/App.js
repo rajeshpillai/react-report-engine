@@ -24,6 +24,9 @@ const data = {
     title: "Header 1",
     subTitle: "Subtitle 1"
   },
+  contentHeader: {
+
+  },
   body: [
     { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
     { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
@@ -87,6 +90,13 @@ function App() {
     });
   }
 
+  const onContentHeaderUpdate = (header) => {
+    setMeta({
+      ...meta,
+      contentHeader: header
+    });
+  }
+
   const onBodyUpdate = (body) => {
     setMeta({
       ...meta,
@@ -120,7 +130,7 @@ function App() {
         <div className="col-sm">
           <Report data={data}>
             <Header preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
-            <ContentHeader />
+            <ContentHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
             <Body preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
             <Footer preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
             />

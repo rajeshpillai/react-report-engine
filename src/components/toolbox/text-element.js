@@ -8,7 +8,7 @@ function TextElement() {
   }
   return (
     <div className="row text-element" draggable
-      onDragStart={(e) => onDragStart(e, "row")}>
+      onDragStart={(e) => onDragStart(e, "text")}>
       TEXT
     </div>
   );
