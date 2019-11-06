@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Body() {
+function Body({ data }) {
   const [rows, setRow] = useState([]);
+  const [preview, setPreview] = useState(false);
 
   useEffect(() => {
     console.log(rows);
@@ -21,6 +22,8 @@ function Body() {
   }
 
   const onDropRow = (e, location) => {
+    // Body Section: Should row be restricted to max 1 as the 
+    // tow as to repeat as per the data length
     e.preventDefault();
     e.stopPropagation();
     let source = e.dataTransfer.getData("text/plain");
@@ -43,7 +46,7 @@ function Body() {
   }
 
   const onColClick = (e, target) => {
-    alert(JSON.stringify(target));
+    //alert(JSON.stringify(target));
     // Grab the column by first grabbing the row
     let fieldName = window.prompt("Enter field name:");
 
@@ -64,11 +67,16 @@ function Body() {
     setRow(newRows);
   }
 
-  return (
+  const previewReport = (e) => {
+    setPreview(!preview);
+  }
+
+
+  let design = (
     <div className="report-body"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Body</h1>
+      <h1>Body</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -84,8 +92,35 @@ function Body() {
             )}
           </div>
         })
+
       }
     </div>
+  );
+
+  console.log("rows: ", rows);
+  let runtime = (
+    <div className="report-body">
+      <h1>Body</h1><button onClick={(e) => previewReport(e)}>PREVIEW</button>
+      {
+        data.map((r) => {
+          return <div key={r.id}
+            className="row report-row edit-mode">
+            {rows[0] && rows[0].cols && rows[0].cols.map((c) =>
+              <div key={c.id}
+                className="col-sm report-col edit-mode"
+                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
+                {r[c.field]}
+              </div>
+            )}
+          </div>
+        })
+
+      }
+    </div>
+  );
+
+  return (
+    preview ? runtime : design
   );
 }
 

@@ -14,9 +14,9 @@ const data = {
     subTitle: "Subtitle 1"
   },
   body: [
-    { id: 1, "name": "Rajesh", city: "Mumbai" },
-    { id: 2, "name": "Rocket Sketch", city: "Mumbai" },
-    { id: 3, "name": "Rocker Coder", city: "Mumbai" },
+    { id: 1, name: "Rajesh", city: "Mumbai" },
+    { id: 2, name: "Rocket Sketch", city: "Mumbai" },
+    { id: 3, name: "Rocker Coder", city: "Mumbai" },
   ],
   footer: {
     "title": "Footer 1",
