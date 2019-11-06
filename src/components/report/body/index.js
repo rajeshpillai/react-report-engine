@@ -87,7 +87,7 @@ function Body({ data }) {
               <div key={c.id}
                 className="col-sm report-col edit-mode"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-
+                {c.field}
               </div>
             )}
           </div>
