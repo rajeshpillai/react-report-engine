@@ -19,7 +19,7 @@ const data = {
     { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
   ],
   footer: {
-    "title": "Footer 1",
+    "title": "Copyright: Algorisys Technologies",
   }
 }
 
@@ -84,7 +84,7 @@ function App() {
     <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
-          <button className="float-right" onClick={()=>togglePreview(!preview)} >PREVIEW</button>
+          <button className="float-right" onClick={() => togglePreview(!preview)} >PREVIEW</button>
           <button className="float-right" >SAVE</button>
         </div>
       </div>
