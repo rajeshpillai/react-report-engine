@@ -24,9 +24,22 @@ function Header() {
     e.preventDefault();
     e.stopPropagation();
     let source = e.dataTransfer.getData("text/plain");
-    console.log(`${source} dropped at ${location}`);
-    let newRow = { id: ++id };
-    setRow([...rows, newRow]);
+    console.log(`${source} dropped at row ${location}`);
+
+    let row = rows.find((r) => r.id == location);
+    console.log('found: ', row);
+
+
+    let newRows = rows.map((r) => {
+      if (r.id == location) {
+        r.cols = row.cols || [];
+        let newCol = { id: ++id };
+        r.cols.push(newCol);
+      }
+      return r;
+    })
+
+    setRow([...newRows]);
   }
 
   return (
@@ -38,8 +51,12 @@ function Header() {
         rows.map((r) => {
           return <div key={r.id}
             onDragOver={(e) => onDragOver(e)}
-            onDrop={(e) => onDropRow(e, "row")}
-            className="row report-row edit-mode"></div>
+            onDrop={(e) => onDropRow(e, r.id)}
+            className="row report-row edit-mode">
+            {r.cols && r.cols.map((c) =>
+              <div key={c.id} className="col-sm report-col edit-mode"></div>
+            )}
+          </div>
         })
       }
     </div>

@@ -36,19 +36,24 @@
   min-height: 100vh;
 }
 
-.edit-mode {
-  background: yellow;
-  width: 100%;
-}
+
 
 .report-row {
   min-height: 2em;
   border: 1px solid gray;
-  margin: 2px;
+  margin: 4px;
 }
 
-.report-col {
+.report-row.edit-mode {
+  background: yellow;
+  width: 100%;
+}
 
+.report-col.edit-mode {
+  background: lightgreen;
+  min-height: 2em;
+  border: 1px solid black;
+  margin: 2px;
 }
 
 /* toolbox elements */
