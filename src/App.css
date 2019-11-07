@@ -44,7 +44,7 @@
   margin: 4px;
 }
 
-.report-row.edit-mode {
+.edit-mode {
   background: yellow;
   width: 100%;
 }
@@ -54,6 +54,12 @@
   min-height: 2em;
   border: 1px solid black;
   margin: 2px;
+}
+
+/* content header row */
+.cheader-row{
+  margin: 4px;
+  min-height: 2em;
 }
 
 /* toolbox elements */

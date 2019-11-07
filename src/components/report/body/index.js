@@ -107,7 +107,6 @@ function Body({ data, onRendered, onUpdate, meta, preview }) {
   console.log("rows: ", rows);
   let runtime = (
     <div className="report-body">
-      <h1>Body</h1>
       {
         data.map((r) => {
           return <div key={'r' + r.id}

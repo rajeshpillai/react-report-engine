@@ -35,8 +35,6 @@ function Footer({ data, preview, meta, onUpdate }) {
     console.log(`${source} dropped at row ${location}`);
 
     let row = rows.find((r) => r.id == location);
-    console.log('found: ', row);
-
 
     let newRows = rows.map((r) => {
       if (r.id == location) {
@@ -99,7 +97,6 @@ function Footer({ data, preview, meta, onUpdate }) {
 
   let runtime = (
     <div className="report-footer">
-      <h1>Footer</h1>
       {
         rows.map((r) => {
           return <div key={r.id}

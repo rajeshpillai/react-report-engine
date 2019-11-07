@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Text from '../../text';
+import Label from '../../label';
 
 function ContentHeader({ data, onUpdate, meta, preview }) {
   const [rows, setRow] = useState([]);
@@ -75,31 +77,8 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
 
   }
 
-  const onColClick = (e, target) => {
-    //alert(JSON.stringify(target));
-    // Grab the column by first grabbing the row
-    let fieldName = window.prompt("Enter field name:");
-
-    let newRows = rows.map((r) => {
-      if (r.id == target.r) {
-        if (r.cols) {
-          r.cols.map((c) => {
-            if (c.id == target.c) {
-              c.field = fieldName;
-            }
-            return c;
-          })
-        }
-      }
-      return r;
-    });
-
-    setRow(newRows);
-  }
-
-
   let design = (
-    <div className="report-header"
+    <div className="content-header"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
       <h1>Content Header</h1>
@@ -108,14 +87,15 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
           return <div key={r.id}
             onDragOver={(e) => onDragOver(e)}
             onDrop={(e) => onDropRow(e, r.id)}
-            className="row report-row edit-mode">
+            className="row cheader-row edit-mode">
             {r.cols && r.cols.map((c) =>
               <div key={'c' + c.id}
                 onDragOver={(e) => onDragOver(e)}
                 onDrop={(e) => onColumnDrop(e, r.id, c.id)}
-                className="col-sm report-col edit-mode"
-                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-                {c.label}{c.field}
+                className="col-sm cheader-col edit-mode">
+                {c.label &&
+                  <Text text="text" meta={{ r: r.id, c: c.id }} />}{c.field}
+
               </div>
             )}
           </div>
@@ -128,16 +108,15 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
   let r = rows[0];
 
   let runtime = (
-    <div className="report-header">
-      <h1>Content Header</h1>
+    <div className="content-header">
       {r &&
         <div key={r.id}
           className="row report-row edit-mode">
           {r && r.cols && r.cols.map((c) =>
             <div key={'c' + c.id}
-              className="col-sm report-col edit-mode"
-              onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-              {data[c.field]}
+              className="col-sm report-col edit-mode">
+              {c.label && <Label text="text" />}
+              {c.field}{data[c.field]}
             </div>
           )}
         </div>
