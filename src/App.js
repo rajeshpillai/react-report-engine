@@ -21,7 +21,7 @@ const calculations = {
 
 const data = {
   header: {
-    title: "Header 1",
+    title: `DAILY SALES REPORT`,
     subTitle: "Subtitle 1"
   },
   contentHeader: {
