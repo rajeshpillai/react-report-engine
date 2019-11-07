@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-let id = 0;
 function ReportFooter({ data, preview, meta, onUpdate }) {
   const [rows, setRow] = useState([]);
 
