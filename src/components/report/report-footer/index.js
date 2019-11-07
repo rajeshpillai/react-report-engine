@@ -100,10 +100,10 @@ function ReportFooter({ data, preview, meta, onUpdate }) {
       {
         rows.map((r) => {
           return <div key={r.id}
-            className="row report-row edit-mode">
+            className="row report-row">
             {r && r.cols && r.cols.map((c) =>
               <div key={c.id}
-                className="col-sm report-col edit-mode"
+                className="col-sm report-col"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
                 {typeof data[c.field] == "function" ? data[c.field]() : data[c.field]}
               </div>

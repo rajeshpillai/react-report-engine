@@ -4,7 +4,7 @@ import './App.css';
 import Report from './components/report';
 import ReportHeader from './components/report/report-header';
 import ReportFooter from './components/report/report-footer';
-import ReportDetail from './components/report/details';
+import ReportDetail from './components/report/report-detail';
 import PageHeader from './components/report/page-header';
 
 import ToolBox from './components/toolbox';

@@ -136,10 +136,10 @@ function PageHeader({ data, onUpdate, meta, preview }) {
     <div className="content-header">
       {r &&
         <div key={r.id}
-          className="row report-row edit-mode">
+          className="row report-row">
           {r && r.cols && r.cols.map((c) =>
             <div key={'c' + c.id}
-              className="col-sm report-col edit-mode">
+              className="col-sm report-col">
               {c.label && <Label text={c.textValue} />}
               {c.field}{data[c.field]}
             </div>

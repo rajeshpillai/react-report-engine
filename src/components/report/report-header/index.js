@@ -101,7 +101,6 @@ function ReportHeader({ data, onUpdate, meta, preview }) {
 
   let runtime = (
     <div className="report-header">
-      <h1>Header</h1>
       {r &&
         <div key={r.id}
           className="row report-row edit-mode">
@@ -109,7 +108,7 @@ function ReportHeader({ data, onUpdate, meta, preview }) {
             <div key={'c' + c.id}
               className="col-sm report-col edit-mode"
               onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-              {data[c.field]}
+              <h1>{data[c.field]}</h1>
             </div>
           )}
         </div>

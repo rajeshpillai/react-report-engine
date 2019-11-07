@@ -110,10 +110,10 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
       {
         data.map((r) => {
           return <div key={'r' + r.id}
-            className="row report-row edit-mode">
+            className="row report-row">
             {rows[0] && rows[0].cols && rows[0].cols.map((c) =>
               <div key={'c' + c.id}
-                className="col-sm report-col edit-mode"
+                className="col-sm report-col"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
                 {r[c.field]}
               </div>
