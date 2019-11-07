@@ -1,8 +1,15 @@
 import React from 'react';
 
-function Text({ text }) {
+function Text({ meta, text, onChange }) {
+  const onTextChange = (e) => {
+    onChange(meta, e.target.value);
+  }
+
   return (
-    <input style={{display:"inline-block",width:"100%"}} type="text" value={text} />
+    <input
+      onChange={onTextChange}
+      style={{ display: "inline-block", width: "100%" }}
+      type="text" defaultValue={text} />
   );
 }
 

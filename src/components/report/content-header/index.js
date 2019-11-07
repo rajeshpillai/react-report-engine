@@ -77,6 +77,30 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
 
   }
 
+  const onTextChange = (meta, value) => {
+    console.log("text changed: ", meta, value);
+
+    let targetRow = rows.find((r) => r.id == meta.r);
+    console.log('found: ', targetRow);
+
+    let newRows = rows.map((r) => {
+      if (r.id == meta.r) {
+        if (r.cols) {
+          r.cols.map((c) => {
+            if (c.id == meta.c) {
+              c.label = "Label";
+              c.textValue = value;
+            }
+            return c;
+          })
+        }
+      }
+      return r;
+    });
+
+    setRow(newRows);
+  }
+
   let design = (
     <div className="content-header"
       onDragOver={(e) => onDragOver(e)}
@@ -94,7 +118,8 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
                 onDrop={(e) => onColumnDrop(e, r.id, c.id)}
                 className="col-sm cheader-col edit-mode">
                 {c.label &&
-                  <Text text="text" meta={{ r: r.id, c: c.id }} />}{c.field}
+                  <Text onChange={onTextChange} text={c.textValue}
+                    meta={{ r: r.id, c: c.id }} />}{c.field}
 
               </div>
             )}
@@ -115,7 +140,7 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
           {r && r.cols && r.cols.map((c) =>
             <div key={'c' + c.id}
               className="col-sm report-col edit-mode">
-              {c.label && <Label text="text" />}
+              {c.label && <Label text={c.textValue} />}
               {c.field}{data[c.field]}
             </div>
           )}
