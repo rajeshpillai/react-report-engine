@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Body({ data, onRendered, onUpdate, meta, preview }) {
+function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
   const [rows, setRow] = useState([]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ function Body({ data, onRendered, onUpdate, meta, preview }) {
     <div className="report-body"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Body</h1>
+      <h1>Report Details</h1>
       {
         rows.map((r) => {
           return <div key={'r' + r.id}
@@ -132,4 +132,4 @@ function Body({ data, onRendered, onUpdate, meta, preview }) {
   );
 }
 
-export default Body;
+export default ReportDetail;

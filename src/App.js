@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 import Report from './components/report';
-import Header from './components/report/header';
-import Footer from './components/report/footer';
-import Body from './components/report/body';
-import ContentHeader from './components/report/content-header';
+import ReportHeader from './components/report/report-header';
+import ReportFooter from './components/report/report-footer';
+import ReportDetail from './components/report/details';
+import PageHeader from './components/report/page-header';
 
 import ToolBox from './components/toolbox';
 
@@ -129,10 +129,10 @@ function App() {
         </div>
         <div className="col-sm">
           <Report data={data}>
-            <Header preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
-            <ContentHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
-            <Body preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
-            <Footer preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
+            <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
+            <PageHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
+            <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
+            <ReportFooter preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
             />
           </Report>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 let id = 0;
-function Footer({ data, preview, meta, onUpdate }) {
+function ReportFooter({ data, preview, meta, onUpdate }) {
   const [rows, setRow] = useState([]);
 
   // Update from parent (report meta data)
@@ -73,7 +73,7 @@ function Footer({ data, preview, meta, onUpdate }) {
     <div className="report-footer"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Footer</h1>
+      <h1>Report Footer</h1>
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -119,4 +119,4 @@ function Footer({ data, preview, meta, onUpdate }) {
   );
 }
 
-export default Footer;
+export default ReportFooter;

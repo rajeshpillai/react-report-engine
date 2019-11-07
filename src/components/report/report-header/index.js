@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Text from '../../text';
-import Label from '../../label';
 
-function ContentHeader({ data, onUpdate, meta, preview }) {
+let id = 0;
+function ReportHeader({ data, onUpdate, meta, preview }) {
   const [rows, setRow] = useState([]);
 
   useEffect(() => {
@@ -11,7 +10,7 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
   }, []);
 
   useEffect(() => {
-    onUpdate && onUpdate(rows);
+    onUpdate(rows);
   }, [rows]);
 
   const onDragOver = (e) => {
@@ -50,46 +49,17 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
     setRow([...newRows]);
   }
 
-  //todo: Check type of toolbox element being dropped
-  const onColumnDrop = (e, row, col) => {
-    e.stopPropagation();
-    let source = e.dataTransfer.getData("text/plain");
-    console.log(`${source} dropped at row ${row}, col ${col}`);
-    // Grab the column
-    let targetRow = rows.find((r) => r.id == row);
-    console.log('found: ', targetRow);
+  const onColClick = (e, target) => {
+    //alert(JSON.stringify(target));
+    // Grab the column by first grabbing the row
+    let fieldName = window.prompt("Enter field name:");
 
     let newRows = rows.map((r) => {
-      if (r.id == row) {
+      if (r.id == target.r) {
         if (r.cols) {
           r.cols.map((c) => {
-            if (c.id == col) {
-              c.label = "Label";
-            }
-            return c;
-          })
-        }
-      }
-      return r;
-    });
-
-    setRow(newRows);
-
-  }
-
-  const onTextChange = (meta, value) => {
-    console.log("text changed: ", meta, value);
-
-    let targetRow = rows.find((r) => r.id == meta.r);
-    console.log('found: ', targetRow);
-
-    let newRows = rows.map((r) => {
-      if (r.id == meta.r) {
-        if (r.cols) {
-          r.cols.map((c) => {
-            if (c.id == meta.c) {
-              c.label = "Label";
-              c.textValue = value;
+            if (c.id == target.c) {
+              c.field = fieldName;
             }
             return c;
           })
@@ -100,27 +70,24 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
 
     setRow(newRows);
   }
+
 
   let design = (
-    <div className="content-header"
+    <div className="report-header"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Content Header</h1>
+      <h1>Report Header</h1>
       {
         rows.map((r) => {
           return <div key={r.id}
             onDragOver={(e) => onDragOver(e)}
             onDrop={(e) => onDropRow(e, r.id)}
-            className="row cheader-row edit-mode">
+            className="row report-row edit-mode">
             {r.cols && r.cols.map((c) =>
               <div key={'c' + c.id}
-                onDragOver={(e) => onDragOver(e)}
-                onDrop={(e) => onColumnDrop(e, r.id, c.id)}
-                className="col-sm cheader-col edit-mode">
-                {c.label &&
-                  <Text onChange={onTextChange} text={c.textValue}
-                    meta={{ r: r.id, c: c.id }} />}{c.field}
-
+                className="col-sm report-col edit-mode"
+                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
+                {c.field}
               </div>
             )}
           </div>
@@ -133,15 +100,16 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
   let r = rows[0];
 
   let runtime = (
-    <div className="content-header">
+    <div className="report-header">
+      <h1>Header</h1>
       {r &&
         <div key={r.id}
           className="row report-row edit-mode">
           {r && r.cols && r.cols.map((c) =>
             <div key={'c' + c.id}
-              className="col-sm report-col edit-mode">
-              {c.label && <Label text={c.textValue} />}
-              {c.field}{data[c.field]}
+              className="col-sm report-col edit-mode"
+              onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
+              {data[c.field]}
             </div>
           )}
         </div>
@@ -154,4 +122,4 @@ function ContentHeader({ data, onUpdate, meta, preview }) {
   );
 }
 
-export default ContentHeader;
+export default ReportHeader;
