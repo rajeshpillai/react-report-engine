@@ -3,11 +3,13 @@ import './App.css';
 
 import Report from './components/report';
 import ReportHeader from './components/report/report-header';
-import ReportFooter from './components/report/report-footer';
-import ReportDetail from './components/report/report-detail';
 import PageHeader from './components/report/page-header';
 import GroupHeader from './components/report/group-header';
+import ReportDetail from './components/report/report-detail';
 import GroupFooter from './components/report/group-footer';
+import ReportFooter from './components/report/report-footer';
+import PageFooter from './components/report/page-footer';
+
 import ToolBox from './components/toolbox';
 
 
@@ -21,11 +23,14 @@ const calculations = {
 
 
 const data = {
-  header: {
+  reportHeader: {
     title: `DAILY SALES REPORT`,
     subTitle: "Subtitle 1"
   },
-  contentHeader: {
+  pageHeader: {
+
+  },
+  groupHeader: {
 
   },
   body: [
@@ -33,9 +38,11 @@ const data = {
     { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
     { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
     { id: 4, name: "Rocker Doodler", city: "Kerala", sales: 300 },
+    { id: 5, name: "Rocker Designer", city: "Kerala", sales: 500 },
 
   ],
-  footer: {
+
+  reportFooter: {
     "title": "Copyright: Algorisys Technologies",
     sum: calculations.sum("sales"),
     avg: calculations.avg("sales"),
@@ -91,10 +98,17 @@ function App() {
     });
   }
 
-  const onContentHeaderUpdate = (header) => {
+  const onPageHeaderUpdate = (header) => {
     setMeta({
       ...meta,
-      contentHeader: header
+      pageHeader: header
+    });
+  }
+
+  const onGroupHeaderUpdate = (header) => {
+    setMeta({
+      ...meta,
+      groupHeader: header
     });
   }
 
@@ -105,13 +119,26 @@ function App() {
     });
   }
 
-  const onFooterUpdate = (footer) => {
+  const onReportFooterUpdate = (footer) => {
     setMeta({
       ...meta,
-      footer: footer
+      reportFooter: footer
     });
   }
 
+  const onPageFooterUpdate = (footer) => {
+    setMeta({
+      ...meta,
+      pageFooter: footer
+    });
+  }
+
+  const onGroupFooterUpdate = (footer) => {
+    setMeta({
+      ...meta,
+      groupFooter: footer
+    });
+  }
 
   return (
     <div className="container-fluid">
@@ -130,12 +157,14 @@ function App() {
         </div>
         <div className="col-sm">
           <Report data={data}>
-            <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
-            <PageHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
-            <GroupHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
+            <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.reportHeader} />
+            <PageHeader preview={preview} meta={meta.pageHeader} onUpdate={onPageHeaderUpdate} data={data.pageHeader} />
+            <GroupHeader preview={preview} meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate} data={data.groupHeader} />
             <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
-            <GroupFooter preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate} />
-            <ReportFooter preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate} />
+            <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} />
+            <ReportFooter preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
+            <PageFooter preview={preview} meta={meta.pageFooter} data={data.pageFooter} onUpdate={onPageFooterUpdate} />
+
           </Report>
         </div>
       </div>

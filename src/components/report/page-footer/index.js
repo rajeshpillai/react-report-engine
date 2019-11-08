@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 /*
-  ReportFooter is only printed once at the end of the report
+  ReportFooter is printed on every page in the report
 */
-function ReportFooter({ data, preview, meta, onUpdate }) {
+function PageFooter({ data, preview, meta, onUpdate }) {
   const [rows, setRow] = useState([]);
 
   // Update from parent (report meta data)
@@ -72,10 +72,10 @@ function ReportFooter({ data, preview, meta, onUpdate }) {
   }
 
   let design = (
-    <div className="report-footer"
+    <div className="page-footer"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
-      <h1>Report Footer</h1>
+      <h1>Page Footer</h1>
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -98,7 +98,7 @@ function ReportFooter({ data, preview, meta, onUpdate }) {
 
 
   let runtime = (
-    <div className="report-footer">
+    <div className="page-footer">
       {
         rows.map((r) => {
           return <div key={r.id}
@@ -121,4 +121,4 @@ function ReportFooter({ data, preview, meta, onUpdate }) {
   );
 }
 
-export default ReportFooter;
+export default PageFooter;
