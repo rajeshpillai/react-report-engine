@@ -34,7 +34,9 @@ const data = {
 
   },
   groupFooter: {
-
+    sum: calculations.sum("sales"),
+    avg: calculations.avg("sales"),
+    max: calculations.max("sales")
   },
   /* to be automated */
   groupBy: "city",
