@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-let id = 0;
 function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
   const [rows, setRow] = useState([]);
 
   useEffect(() => {
     console.log('updated..');
-    onRendered();
+    onRendered && onRendered();
   });
 
   // Update from parent (report meta data)
@@ -16,7 +15,7 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
 
   // Inform parent that rows have updated here
   useEffect(() => {
-    onUpdate(rows);
+    onUpdate && onUpdate(rows);
   }, [rows]);
 
 
@@ -104,7 +103,7 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
     </div>
   );
 
-  console.log("rows: ", rows);
+  console.log("reportDetail: rows: ", rows,data);
   let runtime = (
     <div className="report-body">
       {
@@ -115,7 +114,7 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
               <div key={'c' + c.id}
                 className="col-sm report-col"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-                {r[c.field]}
+                {r[c.field]} - {c.field}
               </div>
             )}
           </div>

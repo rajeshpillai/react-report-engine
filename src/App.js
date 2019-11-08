@@ -33,7 +33,9 @@ const data = {
   groupHeader: {
 
   },
-  data: [
+  /* to be automated */
+  groupBy:"city",  
+  dataset: [
     { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
     { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
     { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
@@ -51,7 +53,7 @@ const data = {
 }
 
 function sum(field) {
-  let sum = data.data.reduce((total, current) => {
+  let sum = data.dataset.reduce((total, current) => {
     return total + current[field];
   }, 0);
 
@@ -59,15 +61,15 @@ function sum(field) {
 }
 
 function avg(field) {
-  let sum = data.data.reduce((total, current) => {
+  let sum = data.dataset.reduce((total, current) => {
     return total + current[field];
   }, 0);
 
-  return sum / data.data.length;
+  return sum / data.dataset.length;
 }
 
 function max(field) {
-  return Math.max(...data.data.map(d => d[field]));
+  return Math.max(...data.dataset.map(d => d[field]));
 }
 
 function App() {
@@ -159,14 +161,16 @@ function App() {
           <Report data={data}>
             <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.reportHeader} />
             <PageHeader preview={preview} meta={meta.pageHeader} onUpdate={onPageHeaderUpdate} data={data.pageHeader} />
-            <GroupHeader preview={preview} meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
-              data={data.groupHeader}>
-              <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.data} onRendered={onBodyRendered} />
+            <GroupHeader groupBy={data.groupBy} preview={preview}
+              meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
+              detailMeta = {meta.body}
+              data={data.groupHeader}
+              reportData={data.dataset}>
+              {/* <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.dataset} onRendered={onBodyRendered} /> */}
             </GroupHeader>
             <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} />
             <ReportFooter preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
             <PageFooter preview={preview} meta={meta.pageFooter} data={data.pageFooter} onUpdate={onPageFooterUpdate} />
-
           </Report>
         </div>
       </div>

@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import ReportDetail from '../report-detail';
 
-function GroupHeader({ data, onUpdate, meta, preview, children }) {
+import _ from 'lodash';
+
+function GroupHeader({ groupBy, data, reportData, onUpdate, meta, detailMeta, preview, children }) {
   const [rows, setRow] = useState([]);
+  const [groupedData, setGroupData] = useState([]);
 
   useEffect(() => {
-    console.log('meta: ', meta);
+    console.log('group meta: ', meta);
     setRow(meta || []);
   }, []);
+
+  useEffect(() => {
+    /* fetch the distince group */
+    // let distinctGroup = reportData.reduce((accum, current, full) => {
+    //   console.log('accum: ', accum);
+    //   accum[groupBy].push(current);
+    // }, { [groupBy]: [] });
+
+    let distinctGroup = _.uniq(_.map(reportData, groupBy));
+
+    console.log(`GroupBy ${groupBy} `, distinctGroup);
+
+    setGroupData(distinctGroup);
+
+  }, [groupBy])
 
   useEffect(() => {
     onUpdate(rows);
@@ -91,7 +110,6 @@ function GroupHeader({ data, onUpdate, meta, preview, children }) {
             )}
           </div>
         })
-
       }
 
       {children}
@@ -109,12 +127,26 @@ function GroupHeader({ data, onUpdate, meta, preview, children }) {
             <div key={'c' + c.id}
               className="col-sm report-col edit-mode"
               onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-              <h1>{data[c.field]}</h1>
+              <h1>{c.field} - {data[c.field]}</h1>
             </div>
           )}
         </div>
       }
-      {children}
+      {
+        groupedData.map((d) => {
+          var eachGroup = _.filter(reportData, function (item) {
+            return d == item[groupBy];
+          });
+          return (
+            <div>
+              <h2>Group: {d}</h2>
+              <ReportDetail preview={preview} meta={detailMeta}
+                data={eachGroup}
+              />
+            </div>
+          )
+        })}
+      {/* {children} */}
     </div>
   );
 
