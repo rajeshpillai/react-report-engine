@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function GroupHeader({ data, onUpdate, meta, preview }) {
+function GroupHeader({ data, onUpdate, meta, preview, children }) {
   const [rows, setRow] = useState([]);
 
   useEffect(() => {
@@ -93,6 +93,8 @@ function GroupHeader({ data, onUpdate, meta, preview }) {
         })
 
       }
+
+      {children}
     </div>
   );
 
@@ -112,6 +114,7 @@ function GroupHeader({ data, onUpdate, meta, preview }) {
           )}
         </div>
       }
+      {children}
     </div>
   );
 
