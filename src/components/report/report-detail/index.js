@@ -103,7 +103,7 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
     </div>
   );
 
-  console.log("reportDetail: rows: ", rows,data);
+  console.log("reportDetail: rows: ", rows, data);
   let runtime = (
     <div className="report-body">
       {
@@ -114,7 +114,7 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
               <div key={'c' + c.id}
                 className="col-sm report-col"
                 onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-                {r[c.field]} - {c.field}
+                {r[c.field]}
               </div>
             )}
           </div>
@@ -123,9 +123,6 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
       }
     </div>
   );
-
-  console.log('rendered..');
-
   return (
     preview ? runtime : design
   );

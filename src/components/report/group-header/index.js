@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReportDetail from '../report-detail';
+import GroupFooter from '../group-footer';
 
 import _ from 'lodash';
 
-function GroupHeader({ groupBy, data, reportData, onUpdate, meta, detailMeta, preview, children }) {
+function GroupHeader({ groupBy, data, reportData, groupFooterData, onUpdate, meta, footerMeta, detailMeta, preview, children, onGroupFooterUpdate }) {
   const [rows, setRow] = useState([]);
   const [groupedData, setGroupData] = useState([]);
 
@@ -38,7 +39,7 @@ function GroupHeader({ groupBy, data, reportData, onUpdate, meta, detailMeta, pr
   const onDropHeader = (e, location) => {
     e.preventDefault();
     let source = e.dataTransfer.getData("text/plain");
-    console.log(`${source} dropped at ${location}`);
+    console.log(`GH: ${source} dropped at ${location}`);
     let newRow = { id: +new Date() };
     setRow([...rows, newRow]);
   }
@@ -49,7 +50,7 @@ function GroupHeader({ groupBy, data, reportData, onUpdate, meta, detailMeta, pr
     e.preventDefault();
     e.stopPropagation();
     let source = e.dataTransfer.getData("text/plain");
-    console.log(`${source} dropped at row ${location}`);
+    console.log(`GH:${source} dropped at row ${location}`);
 
     let row = rows.find((r) => r.id == location);
     console.log('found: ', row);
@@ -111,8 +112,9 @@ function GroupHeader({ groupBy, data, reportData, onUpdate, meta, detailMeta, pr
           </div>
         })
       }
-
-      {children}
+      <GroupFooter preview={preview}
+        onUpdate={onGroupFooterUpdate}
+        meta={footerMeta} data={groupFooterData} />
     </div>
   );
 
@@ -143,6 +145,9 @@ function GroupHeader({ groupBy, data, reportData, onUpdate, meta, detailMeta, pr
               <ReportDetail preview={preview} meta={detailMeta}
                 data={eachGroup}
               />
+              <GroupFooter preview={preview}
+                meta={footerMeta} data={groupFooterData} />
+
             </div>
           )
         })}

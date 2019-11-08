@@ -33,8 +33,11 @@ const data = {
   groupHeader: {
 
   },
+  groupFooter: {
+
+  },
   /* to be automated */
-  groupBy:"city",  
+  groupBy: "city",
   dataset: [
     { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
     { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
@@ -163,12 +166,16 @@ function App() {
             <PageHeader preview={preview} meta={meta.pageHeader} onUpdate={onPageHeaderUpdate} data={data.pageHeader} />
             <GroupHeader groupBy={data.groupBy} preview={preview}
               meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
-              detailMeta = {meta.body}
+              detailMeta={meta.body}
+              footerMeta={meta.groupFooter}
               data={data.groupHeader}
-              reportData={data.dataset}>
+              groupFooterData={data.groupFooter}
+              reportData={data.dataset}
+              onGroupFooterUpdate={onGroupFooterUpdate}
+            >
               {/* <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.dataset} onRendered={onBodyRendered} /> */}
             </GroupHeader>
-            <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} />
+            {/* <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} /> */}
             <ReportFooter preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
             <PageFooter preview={preview} meta={meta.pageFooter} data={data.pageFooter} onUpdate={onPageFooterUpdate} />
           </Report>

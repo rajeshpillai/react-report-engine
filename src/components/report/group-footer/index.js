@@ -10,28 +10,29 @@ function GroupFooter({ data, preview, meta, onUpdate }) {
 
   // Inform parent that rows have updated here
   useEffect(() => {
-    onUpdate(rows);
+    onUpdate && onUpdate(rows);
   }, [rows]);
 
   const onDragOver = (e) => {
     e.preventDefault();
   }
 
-  const onDropHeader = (e, location) => {
+  const onDropFooter = (e, location) => {
     e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     let source = e.dataTransfer.getData("text/plain");
-    console.log(`${source} dropped at ${location}`);
+    console.log(`GF: ${source} dropped at ${location}`);
     let newRow = { id: +new Date() };
     setRow([...rows, newRow]);
   }
 
   const onDropRow = (e, location) => {
-    // Body Section: Should row be restricted to max 1 as the 
-    // tow as to repeat as per the data length
     e.preventDefault();
     e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     let source = e.dataTransfer.getData("text/plain");
-    console.log(`${source} dropped at row ${location}`);
+    console.log(`GF: ${source} dropped at row ${location}`);
 
     let row = rows.find((r) => r.id == location);
 
@@ -71,7 +72,7 @@ function GroupFooter({ data, preview, meta, onUpdate }) {
   let design = (
     <div className="group-footer"
       onDragOver={(e) => onDragOver(e)}
-      onDrop={(e) => onDropHeader(e, "header")}>
+      onDrop={(e) => onDropFooter(e, "header")}>
       <h1>Group Footer</h1>
       {
         rows.map((r) => {
