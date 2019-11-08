@@ -6,7 +6,8 @@ import ReportHeader from './components/report/report-header';
 import ReportFooter from './components/report/report-footer';
 import ReportDetail from './components/report/report-detail';
 import PageHeader from './components/report/page-header';
-
+import GroupHeader from './components/report/group-header';
+import GroupFooter from './components/report/group-footer';
 import ToolBox from './components/toolbox';
 
 
@@ -131,9 +132,10 @@ function App() {
           <Report data={data}>
             <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.header} />
             <PageHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
+            <GroupHeader preview={preview} meta={meta.contentHeader} onUpdate={onContentHeaderUpdate} data={data.contentHeader} />
             <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.body} onRendered={onBodyRendered} />
-            <ReportFooter preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate}
-            />
+            <GroupFooter preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate} />
+            <ReportFooter preview={preview} meta={meta.footer} data={data.footer} onUpdate={onFooterUpdate} />
           </Report>
         </div>
       </div>
