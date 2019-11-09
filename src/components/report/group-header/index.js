@@ -113,13 +113,12 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
           </div>
         })
       }
-      {/* -+
-      3 */}
+      <GroupFooter preview={preview}
+        meta={groupFooterMeta} data={groupFooterData} />
 
     </div>
   );
 
-  let r = rows[0];
 
   let runtime = (
     <div className="group-header">

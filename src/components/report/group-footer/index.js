@@ -98,7 +98,7 @@ function GroupFooter(props) {
   );
 
 
-  let runtime = (
+  let runtime = preview && (
     <div className="group-footer">
       {
         rows.map((r) => {
