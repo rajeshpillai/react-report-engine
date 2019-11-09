@@ -16,11 +16,19 @@ import ToolBox from './components/toolbox';
 
 /* Formulas */
 const calculations = {
-  sum: (field) => () => sum(field),
-  avg: (field) => () => avg(field),
-  max: (field) => () => max(field)
+  sum: (data, field) => () => sum(data, field),
+  avg: (data, field) => () => avg(data, field),
+  max: (data, field) => () => max(data, field)
 };
 
+
+const dataset = [
+  { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
+  { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
+  { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
+  { id: 4, name: "Rocker Doodler", city: "Kerala", sales: 300 },
+  { id: 5, name: "Rocker Designer", city: "Kerala", sales: 500 },
+];
 
 const data = {
   reportHeader: {
@@ -34,47 +42,44 @@ const data = {
 
   },
   groupFooter: {
-    sum: calculations.sum("sales"),
-    avg: calculations.avg("sales"),
-    max: calculations.max("sales")
+    sum: (data, field) => {
+      console.log(`gf: before summing ${field}`, data);
+      return calculations.sum(data, "sales")
+    },
+    avg: (data, field) => calculations.avg(data, "sales"),
+    max: (data, field) => calculations.max(data, "sales")
   },
   /* to be automated */
   groupBy: "city",
-  dataset: [
-    { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
-    { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
-    { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
-    { id: 4, name: "Rocker Doodler", city: "Kerala", sales: 300 },
-    { id: 5, name: "Rocker Designer", city: "Kerala", sales: 500 },
-
-  ],
 
   reportFooter: {
     "title": "Copyright: Algorisys Technologies",
-    sum: calculations.sum("sales"),
-    avg: calculations.avg("sales"),
-    max: calculations.max("sales")
+    sum: calculations.sum(dataset, "sales"),
+    avg: calculations.avg(dataset, "sales"),
+    max: calculations.max(dataset, "sales")
   }
 }
 
-function sum(field) {
-  let sum = data.dataset.reduce((total, current) => {
+function sum(reportData, field) {
+  console.log(`before summing ${field}`, reportData);
+  let sum = reportData.reduce((total, current) => {
     return total + current[field];
   }, 0);
+  console.log(`summing ${field}`, reportData, sum);
 
   return sum;
 }
 
-function avg(field) {
-  let sum = data.dataset.reduce((total, current) => {
+function avg(data, field) {
+  let sum = data.reduce((total, current) => {
     return total + current[field];
   }, 0);
 
   return sum / data.dataset.length;
 }
 
-function max(field) {
-  return Math.max(...data.dataset.map(d => d[field]));
+function max(data, field) {
+  return Math.max(...data.map(d => d[field]));
 }
 
 function App() {
@@ -169,17 +174,19 @@ function App() {
             <GroupHeader groupBy={data.groupBy} preview={preview}
               meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
               detailMeta={meta.body}
-              footerMeta={meta.groupFooter}
+              groupFooterMeta={meta.groupFooter}
+              reportFooterMeta={meta.reportFooter}
               data={data.groupHeader}
               groupFooterData={data.groupFooter}
-              reportData={data.dataset}
+              reportFooterData={data.reportFooter}
+              reportData={dataset}
               onGroupFooterUpdate={onGroupFooterUpdate}
             >
               {/* <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.dataset} onRendered={onBodyRendered} /> */}
             </GroupHeader>
             {/* <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} /> */}
-            <ReportFooter preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
             <PageFooter preview={preview} meta={meta.pageFooter} data={data.pageFooter} onUpdate={onPageFooterUpdate} />
+            <ReportFooter preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
           </Report>
         </div>
       </div>

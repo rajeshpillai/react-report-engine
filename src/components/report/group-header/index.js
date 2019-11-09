@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReportDetail from '../report-detail';
 import GroupFooter from '../group-footer';
+import ReportFooter from '../report-footer';
 
 import _ from 'lodash';
 
-function GroupHeader({ groupBy, data, reportData, groupFooterData, onUpdate, meta, footerMeta, detailMeta, preview, children, onGroupFooterUpdate }) {
+function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterData, reportFooterMeta, onUpdate, meta, groupFooterMeta, detailMeta, preview, children, onGroupFooterUpdate }) {
   const [rows, setRow] = useState([]);
   const [groupedData, setGroupData] = useState([]);
 
@@ -112,9 +113,9 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, onUpdate, met
           </div>
         })
       }
-      <GroupFooter preview={preview}
-        onUpdate={onGroupFooterUpdate}
-        meta={footerMeta} data={groupFooterData} />
+      {/* -+
+      3 */}
+
     </div>
   );
 
@@ -122,7 +123,7 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, onUpdate, met
 
   let runtime = (
     <div className="group-header">
-      {r &&
+      {/* {r &&
         <div key={r.id}
           className="row report-row edit-mode">
           {r && r.cols && r.cols.map((c) =>
@@ -133,12 +134,13 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, onUpdate, met
             </div>
           )}
         </div>
-      }
+      } */}
       {
         groupedData.map((d) => {
           var eachGroup = _.filter(reportData, function (item) {
             return d == item[groupBy];
           });
+          console.log("eachGroup: ", eachGroup);
           return (
             <div>
               <h2>Group: {d}</h2>
@@ -146,8 +148,8 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, onUpdate, met
                 data={eachGroup}
               />
               <GroupFooter preview={preview}
-                meta={footerMeta} data={groupFooterData} />
-
+                reportData={eachGroup}
+                meta={groupFooterMeta} data={groupFooterData} />
             </div>
           )
         })}

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-function GroupFooter({ data, preview, meta, onUpdate }) {
+function GroupFooter(props) {
+  const { data, preview, meta, reportData, onUpdate } = props;
   const [rows, setRow] = useState([]);
 
+
+  console.log("GroupFooter: data", reportData, data);
   // Update from parent (report meta data)
   useEffect(() => {
     setRow(meta || []);
@@ -103,9 +106,10 @@ function GroupFooter({ data, preview, meta, onUpdate }) {
             className="row report-row">
             {r && r.cols && r.cols.map((c) =>
               <div key={c.id}
-                className="col-sm report-col"
-                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-                {typeof data[c.field] == "function" ? data[c.field]() : data[c.field]}
+                className="col-sm report-col">
+                {/* {c.field + ' ' + data[c.field]} */}
+                {typeof data[c.field] == "function" ?
+                  data[c.field](reportData, c.field)(reportData, c.field) : data[c.field]}
               </div>
             )}
           </div>

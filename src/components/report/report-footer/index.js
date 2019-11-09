@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react';
 /*
   ReportFooter is only printed once at the end of the report
 */
-function ReportFooter({ data, preview, meta, onUpdate }) {
+function ReportFooter({ data, preview, meta, reportData, onUpdate }) {
   const [rows, setRow] = useState([]);
+  console.log("RF:data ", data);
 
   // Update from parent (report meta data)
   useEffect(() => {
@@ -13,7 +14,7 @@ function ReportFooter({ data, preview, meta, onUpdate }) {
 
   // Inform parent that rows have updated here
   useEffect(() => {
-    onUpdate(rows);
+    onUpdate && onUpdate(rows);
   }, [rows]);
 
   const onDragOver = (e) => {
@@ -105,9 +106,9 @@ function ReportFooter({ data, preview, meta, onUpdate }) {
             className="row report-row">
             {r && r.cols && r.cols.map((c) =>
               <div key={c.id}
-                className="col-sm report-col"
-                onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-                {typeof data[c.field] == "function" ? data[c.field]() : data[c.field]}
+                className="col-sm report-col">
+                {typeof data[c.field] == "function" ?
+                  data[c.field](reportData, c.field) : data[c.field]}
               </div>
             )}
           </div>
