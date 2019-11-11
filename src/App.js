@@ -23,7 +23,7 @@ const calculations = {
 
 
 const dataset = [
-  { id: 1, name: "Name 1", country: "India",   city: "Mumbai", sales: 100 },
+  { id: 1, name: "Name 1", country: "India", city: "Mumbai", sales: 100 },
   { id: 2, name: "Name 2", country: "India", city: "Mumbai", sales: 50 },
   { id: 3, name: "Name 3", country: "India", city: "Mumbai", sales: 100 },
   { id: 4, name: "Name 4", country: "India", city: "Kerala", sales: 300 },
@@ -32,8 +32,8 @@ const dataset = [
   { id: 7, name: "Name 2", country: "US", city: "Texas", sales: 50 },
   { id: 8, name: "Name 3", country: "US", city: "San Fransisco", sales: 100 },
   { id: 9, name: "Name 4", country: "UK", city: "London", sales: 300 },
-  { id: 10, name:"Name 5", country: "UK",  city: "Hammersmith", sales: 500 },
-  
+  { id: 10, name: "Name 5", country: "UK", city: "Hammersmith", sales: 500 },
+
 ];
 
 const data = {
@@ -56,7 +56,7 @@ const data = {
     max: (data, field) => calculations.max(data, "sales")
   },
   /* to be automated */
-  groupBy: "city",
+  groupBy: ["city"],
 
   reportFooter: {
     "title": "Copyright: Algorisys Technologies",
@@ -178,19 +178,22 @@ function App() {
           <Report data={data}>
             <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.reportHeader} />
             <PageHeader preview={preview} meta={meta.pageHeader} onUpdate={onPageHeaderUpdate} data={data.pageHeader} />
-            <GroupHeader groupBy={data.groupBy} preview={preview}
-              meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
-              detailMeta={meta.body}
-              groupFooterMeta={meta.groupFooter}
-              reportFooterMeta={meta.reportFooter}
-              data={data.groupHeader}
-              groupFooterData={data.groupFooter}
-              reportFooterData={data.reportFooter}
-              reportData={dataset}
-              onGroupFooterUpdate={onGroupFooterUpdate}
-            >
-              {/* <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.dataset} onRendered={onBodyRendered} /> */}
-            </GroupHeader>
+            {data.groupBy.map((g) => {
+              return <GroupHeader groupBy={g} preview={preview}
+                meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
+                detailMeta={meta.body}
+                groupFooterMeta={meta.groupFooter}
+                reportFooterMeta={meta.reportFooter}
+                data={data.groupHeader}
+                groupFooterData={data.groupFooter}
+                reportFooterData={data.reportFooter}
+                reportData={dataset}
+                onGroupFooterUpdate={onGroupFooterUpdate}
+              > </GroupHeader>
+            })}
+
+            {/* <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.dataset} onRendered={onBodyRendered} /> */}
+
             {/* <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} /> */}
             <PageFooter preview={preview} meta={meta.pageFooter} data={data.pageFooter} onUpdate={onPageFooterUpdate} />
             <ReportFooter reportData={dataset} preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
