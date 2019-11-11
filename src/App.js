@@ -70,12 +70,12 @@ function sum(reportData, field) {
   return sum;
 }
 
-function avg(data, field) {
-  let sum = data.reduce((total, current) => {
+function avg(reportData, field) {
+  let sum = reportData.reduce((total, current) => {
     return total + current[field];
   }, 0);
 
-  return sum / data.dataset.length;
+  return sum / reportData.length;
 }
 
 function max(data, field) {
