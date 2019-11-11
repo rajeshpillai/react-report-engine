@@ -104,7 +104,7 @@ function ReportDetail({ data, onRendered, onUpdate, meta, preview }) {
   );
 
   console.log("reportDetail: rows: ", rows, data);
-  let runtime = (
+  let runtime = (preview &&
     <div className="report-body">
       {
         data.map((r) => {

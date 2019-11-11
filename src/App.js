@@ -23,11 +23,17 @@ const calculations = {
 
 
 const dataset = [
-  { id: 1, name: "Rajesh", city: "Mumbai", sales: 100 },
-  { id: 2, name: "Rocket Sketch", city: "Mumbai", sales: 50 },
-  { id: 3, name: "Rocker Coder", city: "Mumbai", sales: 100 },
-  { id: 4, name: "Rocker Doodler", city: "Kerala", sales: 300 },
-  { id: 5, name: "Rocker Designer", city: "Kerala", sales: 500 },
+  { id: 1, name: "Name 1", country: "India",   city: "Mumbai", sales: 100 },
+  { id: 2, name: "Name 2", country: "India", city: "Mumbai", sales: 50 },
+  { id: 3, name: "Name 3", country: "India", city: "Mumbai", sales: 100 },
+  { id: 4, name: "Name 4", country: "India", city: "Kerala", sales: 300 },
+  { id: 5, name: "Name 5", country: "India", city: "Kerala", sales: 500 },
+  { id: 6, name: "Name 1", country: "US", city: "Texas", sales: 100 },
+  { id: 7, name: "Name 2", country: "US", city: "Texas", sales: 50 },
+  { id: 8, name: "Name 3", country: "US", city: "San Fransisco", sales: 100 },
+  { id: 9, name: "Name 4", country: "UK", city: "London", sales: 300 },
+  { id: 10, name:"Name 5", country: "UK",  city: "Hammersmith", sales: 500 },
+  
 ];
 
 const data = {

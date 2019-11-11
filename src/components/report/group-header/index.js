@@ -113,6 +113,8 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
           </div>
         })
       }
+      <ReportDetail preview={preview} meta={detailMeta} />
+      
       <GroupFooter preview={preview}
         meta={groupFooterMeta} data={groupFooterData} />
 
