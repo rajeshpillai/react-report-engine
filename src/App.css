@@ -62,6 +62,16 @@
   min-height: 2em;
 }
 
+.cheader-row.edit-mode{
+  padding: 2px;
+  border: 1px solid red;
+}
+
+.cheader-col.edit-mode{
+  border: 1px solid blue;
+  margin: 10px;
+}
+
 /* toolbox elements */
 .row-element, .col-element {
   border: 1px solid lightblue;

@@ -28,7 +28,6 @@ function PageHeader({ data, onUpdate, meta, preview }) {
 
   const onDropRow = (e, location) => {
     // Body Section: Should row be restricted to max 1 as the 
-    // tow as to repeat as per the data length
     e.preventDefault();
     e.stopPropagation();
     let source = e.dataTransfer.getData("text/plain");
