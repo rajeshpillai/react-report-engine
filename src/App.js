@@ -55,8 +55,8 @@ const data = {
   reportFooter: {
     "title": "Copyright: Algorisys Technologies",
     sum: (data, field) => calculations.sum(data, "sales"),
-    avg: (data, field) => calculations.avg(data, field),
-    max: (data, field) => calculations.max(data, field)
+    avg: (data, field) => calculations.avg(data, "sales"),
+    max: (data, field) => calculations.max(data, "sales")
   },
 
   reportFooterx: {
