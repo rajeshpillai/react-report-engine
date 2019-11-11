@@ -108,7 +108,7 @@ function ReportFooter({ data, preview, meta, reportData, onUpdate }) {
               <div key={c.id}
                 className="col-sm report-col">
                 {typeof data[c.field] == "function" ?
-                  data[c.field](reportData, c.field) : data[c.field]}
+                  data[c.field](reportData, c.field).toFixed(2) : data[c.field]}
               </div>
             )}
           </div>
