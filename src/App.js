@@ -33,6 +33,7 @@ const dataset = [
   { id: 8, name: "Name 3", country: "US", city: "San Fransisco", sales: 100 },
   { id: 9, name: "Name 4", country: "UK", city: "London", sales: 300 },
   { id: 10, name: "Name 5", country: "UK", city: "Hammersmith", sales: 500 },
+  { id: 11, name: "Name 5", country: "India", city: "", sales: 300 },
 
 ];
 
@@ -56,7 +57,7 @@ const data = {
     max: (data, field) => calculations.max(data, "sales")
   },
   /* to be automated */
-  groupBy: ["city"],
+  groupBy: ["country", "city"],
 
   reportFooter: {
     "title": "Copyright: Algorisys Technologies",
@@ -175,7 +176,7 @@ function App() {
           <ToolBox />
         </div>
         <div className="col-sm">
-          <Report data={data}>
+          <Report reportData={dataset} groupBy={data.groupBy}>
             <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.reportHeader} />
             <PageHeader preview={preview} meta={meta.pageHeader} onUpdate={onPageHeaderUpdate} data={data.pageHeader} />
             {data.groupBy.map((g) => {

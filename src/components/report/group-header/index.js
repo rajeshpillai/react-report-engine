@@ -23,7 +23,10 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
 
     let distinctGroup = _.uniq(_.map(reportData, groupBy));
 
-    console.log(`GroupBy ${groupBy} `, distinctGroup);
+    // Take distinct of each group by
+
+
+    console.log(`*****************GroupBy ${groupBy} `, distinctGroup);
 
     setGroupData(distinctGroup);
 
@@ -114,7 +117,7 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
         })
       }
       <ReportDetail preview={preview} meta={detailMeta} />
-      
+
       <GroupFooter preview={preview}
         meta={groupFooterMeta} data={groupFooterData} />
 
