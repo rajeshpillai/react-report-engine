@@ -16,9 +16,9 @@ import ToolBox from './components/toolbox';
 
 /* Formulas */
 const calculations = {
-  sum: (data, field) => () => sum(data, field),
-  avg: (data, field) => () => avg(data, field),
-  max: (data, field) => () => max(data, field)
+  sum: (data, field) => sum(data, field),
+  avg: (data, field) => avg(data, field),
+  max: (data, field) => max(data, field)
 };
 
 
@@ -53,6 +53,13 @@ const data = {
   groupBy: "city",
 
   reportFooter: {
+    "title": "Copyright: Algorisys Technologies",
+    sum: (data, field) => calculations.sum(data, "sales"),
+    avg: (data, field) => calculations.avg(data, field),
+    max: (data, field) => calculations.max(data, field)
+  },
+
+  reportFooterx: {
     "title": "Copyright: Algorisys Technologies",
     sum: calculations.sum(dataset, "sales"),
     avg: calculations.avg(dataset, "sales"),
@@ -186,7 +193,7 @@ function App() {
             </GroupHeader>
             {/* <GroupFooter preview={preview} meta={meta.groupFooter} data={data.groupFooter} onUpdate={onGroupFooterUpdate} /> */}
             <PageFooter preview={preview} meta={meta.pageFooter} data={data.pageFooter} onUpdate={onPageFooterUpdate} />
-            <ReportFooter preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
+            <ReportFooter reportData={dataset} preview={preview} meta={meta.reportFooter} data={data.reportFooter} onUpdate={onReportFooterUpdate} />
           </Report>
         </div>
       </div>

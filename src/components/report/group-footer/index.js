@@ -109,7 +109,7 @@ function GroupFooter(props) {
                 className="col-sm report-col">
                 {/* {c.field + ' ' + data[c.field]} */}
                 {typeof data[c.field] == "function" ?
-                  data[c.field](reportData, c.field)(reportData, c.field) : data[c.field]}
+                  data[c.field](reportData, c.field) : data[c.field]}
               </div>
             )}
           </div>
