@@ -127,33 +127,29 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
 
   let runtime = (
     <div className="group-header">
-      {/* {r &&
-        <div key={r.id}
-          className="row report-row edit-mode">
-          {r && r.cols && r.cols.map((c) =>
-            <div key={'c' + c.id}
-              className="col-sm report-col edit-mode"
-              onClick={(e) => onColClick(e, { r: r.id, c: c.id })}>
-              <h1>{c.field} - {data[c.field]}</h1>
-            </div>
-          )}
-        </div>
-      } */}
       {
-        groupedData.map((d) => {
-          var eachGroup = _.filter(reportData, function (item) {
-            return d == item[groupBy];
-          });
-          console.log("eachGroup: ", eachGroup);
+        Object.keys(reportData).map((d) => {
+          console.log("IMP: ", d, reportData[d]);
+
           return (
             <div>
               <h2>Group: {d}</h2>
-              <ReportDetail preview={preview} meta={detailMeta}
-                data={eachGroup}
-              />
-              <GroupFooter preview={preview}
-                reportData={eachGroup}
-                meta={groupFooterMeta} data={groupFooterData} />
+              {
+                Object.keys(reportData[d]).map((g) => {
+                  return (
+                    <>
+                      <h2>{g}</h2>
+                      <ReportDetail preview={preview} meta={detailMeta}
+                        data={reportData[d][g]} />
+                      <GroupFooter preview={preview}
+                        reportData={reportData[d][g]}
+                        meta={groupFooterMeta} data={groupFooterData} />
+                    </>
+                  )
+                })
+              }
+
+
             </div>
           )
         })}

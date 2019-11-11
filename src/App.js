@@ -97,6 +97,8 @@ function App() {
     return meta || {};
   });
 
+  const [groupedData, setGroupedData] = useState({});
+
   const [preview, togglePreview] = useState(false);
 
   // First load
@@ -160,6 +162,21 @@ function App() {
     });
   }
 
+  useEffect(() => {
+    console.log('********APP DATA PROCESSING *******');
+    var groupedData = window.d3.nest()
+      .key(function (d) { return d.country; })
+      .key(function (d) { return d.city; })
+      // .rollup(function (v) {
+      //   return window.d3.sum(v, function (d) { return d.sales; });
+      // })
+      .object(dataset);
+    console.log(JSON.stringify(groupedData));
+
+    setGroupedData(groupedData);
+
+  }, [])
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -179,19 +196,18 @@ function App() {
           <Report reportData={dataset} groupBy={data.groupBy}>
             <ReportHeader preview={preview} meta={meta.header} onUpdate={onHeaderUpdate} data={data.reportHeader} />
             <PageHeader preview={preview} meta={meta.pageHeader} onUpdate={onPageHeaderUpdate} data={data.pageHeader} />
-            {data.groupBy.map((g) => {
-              return <GroupHeader groupBy={g} preview={preview}
-                meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
-                detailMeta={meta.body}
-                groupFooterMeta={meta.groupFooter}
-                reportFooterMeta={meta.reportFooter}
-                data={data.groupHeader}
-                groupFooterData={data.groupFooter}
-                reportFooterData={data.reportFooter}
-                reportData={dataset}
-                onGroupFooterUpdate={onGroupFooterUpdate}
-              > </GroupHeader>
-            })}
+
+            <GroupHeader groupBy={data.groupBy} preview={preview}
+              meta={meta.groupHeader} onUpdate={onGroupHeaderUpdate}
+              detailMeta={meta.body}
+              groupFooterMeta={meta.groupFooter}
+              reportFooterMeta={meta.reportFooter}
+              data={data.groupHeader}
+              groupFooterData={data.groupFooter}
+              reportFooterData={data.reportFooter}
+              reportData={groupedData}
+              onGroupFooterUpdate={onGroupFooterUpdate}
+            > </GroupHeader>
 
             {/* <ReportDetail preview={preview} meta={meta.body} onUpdate={onBodyUpdate} data={data.dataset} onRendered={onBodyRendered} /> */}
 
