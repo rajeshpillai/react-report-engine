@@ -104,6 +104,7 @@ function ReportFooter({ data, preview, meta, reportData, onUpdate }) {
         rows.map((r) => {
           return <div key={r.id}
             className="row report-row">
+            <h3>REPORT TOTAL</h3>
             {r && r.cols && r.cols.map((c) =>
               <div key={c.id}
                 className="col-sm report-col">
