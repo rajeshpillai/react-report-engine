@@ -14,22 +14,12 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
     setRow(meta || []);
   }, []);
 
+  //unused: kept for ref
   useEffect(() => {
-    /* fetch the distince group */
-    // let distinctGroup = reportData.reduce((accum, current, full) => {
-    //   console.log('accum: ', accum);
-    //   accum[groupBy].push(current);
-    // }, { [groupBy]: [] });
-
     let distinctGroup = _.uniq(_.map(reportData, groupBy));
-
     // Take distinct of each group by
-
-
     console.log(`*****************GroupBy ${groupBy} `, distinctGroup);
-
     setGroupData(distinctGroup);
-
   }, [groupBy])
 
   useEffect(() => {
