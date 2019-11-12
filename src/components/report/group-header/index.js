@@ -95,7 +95,7 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
   }
 
 
-  let design = (
+  let design = (!preview &&
     <div className="group-header"
       onDragOver={(e) => onDragOver(e)}
       onDrop={(e) => onDropHeader(e, "header")}>
@@ -125,12 +125,11 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
   );
 
 
-  let runtime = (
+  let runtime = (preview &&
     <div className="group-header">
       {
         Object.keys(reportData).map((d) => {
           console.log("IMP: ", d, reportData[d]);
-
           return (
             <div>
               <h2>Group: {d}</h2>
@@ -148,12 +147,9 @@ function GroupHeader({ groupBy, data, reportData, groupFooterData, reportFooterD
                   )
                 })
               }
-
-
             </div>
           )
         })}
-      {/* {children} */}
     </div>
   );
 
